@@ -1,0 +1,21 @@
+﻿  GuiButton.cpp
+  GuiManager.cpp
+  Main.cpp
+  App.cpp
+  Audio.cpp
+  Input.cpp
+  Map.cpp
+  PerfTimer.cpp
+  Scene.cpp
+C:\Users\Alejandromo3\Desktop\L14_GUI_System.Handout.Solution\Game\Source\Scene.cpp(67,33): warning C4244: '-=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Alejandromo3\Desktop\L14_GUI_System.Handout.Solution\Game\Source\Scene.cpp(70,33): warning C4244: '+=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Alejandromo3\Desktop\L14_GUI_System.Handout.Solution\Game\Source\Scene.cpp(73,33): warning C4244: '-=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Alejandromo3\Desktop\L14_GUI_System.Handout.Solution\Game\Source\Scene.cpp(76,33): warning C4244: '+=': conversión de 'float' a 'int'; posible pérdida de datos
+  Render.cpp
+  Textures.cpp
+  Timer.cpp
+  Window.cpp
+  Log.cpp
+  pugixml.cpp
+  Generando código...
+  Game.vcxproj -> C:\Users\Alejandromo3\Desktop\L14_GUI_System.Handout.Solution\Build\Debug\Game.exe
