@@ -2,6 +2,11 @@
 #include "App.h"
 #include "Render.h"
 
+
+//https://github.com/enricmc19/BattleScene-Transitions
+//CHECK THIS CODE TO DO THE TRANSITIONS AND THIS MODULE
+
+
 Transitions::Transitions() :Module()
 {
 	name.Create("BattleTransitions");

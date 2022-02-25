@@ -24,6 +24,14 @@ public:
 	void DrawTransition1();
 
 public:
+
+	SDL_Rect screenRect;
+	SDL_Rect transit1;
+	SDL_Rect transit2;
+	SDL_Rect transit3;
+	SDL_Rect transit4;
+	
+
 };
 
 #endif // __WINDOW_H__
