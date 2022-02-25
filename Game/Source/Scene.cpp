@@ -5,9 +5,8 @@
 #include "Render.h"
 #include "Window.h"
 #include "Scene.h"
-#include "Map.h"
 #include "GuiManager.h"
-
+#include "Transitions.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -33,14 +32,14 @@ bool Scene::Awake()
 bool Scene::Start()
 {
 	// L03: DONE: Load map
-	app->map->Load("iso_walk.tmx");
+
 	
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
 	// L14: TODO 2: Declare a GUI Button and create it using the GuiManager
-	btn1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Test1", { (app->win->GetWidth() / 2) - 300, app->win->GetWidth() / 10, 160, 40 }, this);
-	btn2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Test2", { (app->win->GetWidth() / 2) + 300, app->win->GetWidth() / 10, 160, 40 }, this);
+	btn1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Test1", { (app->win->GetWidth() / 2) - 200, app->win->GetWidth() / 10, 160, 40 }, this);
+	btn2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Test2", { (app->win->GetWidth() / 2) + 200, app->win->GetWidth() / 10, 160, 40 }, this);
 
 	return true;
 }
@@ -61,22 +60,10 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	// L08: TODO 6: Make the camera movement independent of framerate
-	float speed = 1; 
-	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y -= speed;
-
-	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y += speed;
-
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x -= speed;
-
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x += speed;
-
-	// Draw map
-	app->map->Draw();
+	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	{
+		app->transitions->DrawTransition1();
+	}
 
 	//Draw GUI
 	app->guiManager->Draw();
@@ -107,6 +94,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		if (control->id == 1) 
 		{
 			LOG("Click on button 1");
+			
 		}
 
 		if (control->id == 2)

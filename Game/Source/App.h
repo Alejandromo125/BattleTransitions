@@ -21,6 +21,7 @@ class Audio;
 class Scene;
 class Map;
 class GuiManager;
+class Transitions;
 
 class App
 {
@@ -93,6 +94,7 @@ public:
 	Scene* scene;
 	Map* map;
 	GuiManager* guiManager;
+	Transitions* transitions;
 
 private:
 

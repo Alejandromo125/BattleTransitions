@@ -5,9 +5,8 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Scene.h"
-#include "Map.h"
 #include "GuiManager.h"
-
+#include "Transitions.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -27,8 +26,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures();
 	audio = new Audio();
 	scene = new Scene();
-	map = new Map();
 	guiManager = new GuiManager();
+	transitions = new Transitions();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -37,8 +36,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(scene);
-	AddModule(map);
 	AddModule(guiManager);
+	AddModule(transitions);
 
 	// Render last to swap buffer
 	AddModule(render);
