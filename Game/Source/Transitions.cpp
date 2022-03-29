@@ -1,10 +1,11 @@
 #include "Transitions.h"
 #include "App.h"
 #include "Render.h"
+#include "easings.h"
+#include <iostream>
 
-
+using namespace std;
 //https://github.com/enricmc19/BattleScene-Transitions
-//CHECK THIS CODE TO DO THE TRANSITIONS AND THIS MODULE
 
 
 Transitions::Transitions() :Module()
@@ -16,26 +17,41 @@ Transitions::~Transitions() {}
 
 bool Transitions::Start()
 {
+	transit1 = { 0,0,0,0 };
+	
 	return true;
 }
 
-
-bool Transitions::Update(float dt)
+bool Transitions::PostUpdate()
 {
-	return true;
+	bool ret = true;
+
+	if (active_transition != false)
+	{
+		timer_transition++;
+	}
+
+	return ret;
+
 }
 
 
 void Transitions::DrawTransition1()
 {
-	for (int x = 0; x < 10; x++)
-	{
-		for (int y = 0; y < 10; y++)
-		{
-			app->render->DrawRectangle({x,y,100,100}, 255, 0, 0);
-		}
-	}
 	
+		SDL_SetRenderDrawColor(app->render->renderer, 255, 0, 0, 255);
+		SDL_RenderFillRect(app->render->renderer, &transit1);
+		transit1.x = 0;
+		transit1.y = 0;
+		transit1.h = EaseBounceInOut(timer_transition/1000, 1080 / 8, 1080, 45);
+		transit1.w = EaseBounceInOut(timer_transition/1000, 1080 / 8, 1920, 45);
+
+
+
+		cout << transit1.h << endl;
+		cout << transit1.w << endl;
+	
+
 }
 
 

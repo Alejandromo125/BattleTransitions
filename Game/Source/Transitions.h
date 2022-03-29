@@ -2,7 +2,7 @@
 #define __TRANSITIONS_H__
 
 #include "Module.h"
-
+#include "SDL/include/SDL_rect.h"
 
 class Transitions : public Module
 {
@@ -17,19 +17,21 @@ public:
 	// Called before the first frame
 	bool Start();
 
-	bool Update(float dt);
 
+	bool PostUpdate();
 	//TODO 1: CREATE FUNCTIONS TO DRAW THE TRANSITIONS
 	//CREATE X DIFERENTS FUNCTIONS THAT WILL BE ACCESSED TO DRAW DIFFERENT TRANSITIONS
 	void DrawTransition1();
 
 public:
 
-	SDL_Rect screenRect;
+	bool active_transition = false;
+	int timer_transition = 0;
+	// The rectangles of the screen, used to render the animation
 	SDL_Rect transit1;
 	SDL_Rect transit2;
-	SDL_Rect transit3;
-	SDL_Rect transit4;
+    SDL_Rect transit3;
+    SDL_Rect transit4;
 	
 
 };

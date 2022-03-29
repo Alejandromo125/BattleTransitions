@@ -60,6 +60,7 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Transitions.h" />
+    <ClInclude Include="Source\easings.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

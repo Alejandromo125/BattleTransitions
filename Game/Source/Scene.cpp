@@ -62,7 +62,9 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
 	{
+		app->transitions->active_transition = true;
 		app->transitions->DrawTransition1();
+		//app->transitions->timer_transition = 0;
 	}
 
 	//Draw GUI
