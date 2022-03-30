@@ -2,6 +2,7 @@
 #include "App.h"
 #include "Render.h"
 #include "easings.h"
+#include "Window.h"
 #include <iostream>
 
 using namespace std;
@@ -17,8 +18,10 @@ Transitions::~Transitions() {}
 
 bool Transitions::Start()
 {
-	transit1 = { 0,0,0,0 };
-	
+	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+
+	app->win->GetWindowSize(win_width, win_height);
+
 	return true;
 }
 
@@ -26,11 +29,23 @@ bool Transitions::PostUpdate()
 {
 	bool ret = true;
 
-	if (active_transition != false)
+	if (active_transition)
 	{
 		timer_transition++;
-	}
 
+
+		if (animationSelected == 1)
+		{
+			DrawTransition1();
+		}
+		
+	}
+	else if (!active_transition)
+	{
+		timer_transition = 0;
+	}
+	
+	
 	return ret;
 
 }
@@ -38,20 +53,61 @@ bool Transitions::PostUpdate()
 
 void Transitions::DrawTransition1()
 {
-	
-		SDL_SetRenderDrawColor(app->render->renderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(app->render->renderer, &transit1);
-		transit1.x = 0;
-		transit1.y = 0;
-		transit1.h = EaseBounceInOut(timer_transition/1000, 1080 / 8, 1080, 45);
-		transit1.w = EaseBounceInOut(timer_transition/1000, 1080 / 8, 1920, 45);
 
-
-
-		cout << transit1.h << endl;
-		cout << transit1.w << endl;
-	
-
+	transit1.x = 0;
+	transit1.y = 0;
+	transit1.h = EaseBounceInOut(timer_transition, win_width / 64, win_width, 150);
+	transit1.w = EaseBounceInOut(timer_transition, win_width / 64, win_height, 150);
+	app->render->DrawRectangle(transit1, 255, 0, 0, 255);
+	cout << timer_transition << endl;
+	if (timer_transition >= 1300)
+	{
+		active_transition = false;
+	}
 }
+/*
+void Transitions::DrawTransition2()
+{
+	// BARRAS DESDE EL CENTRO HASTA LOS LADOS
+	transit1.x = 0;
+	transit1.y = 0;
+	transit1.h = EaseBounceInOut(timer_transition, win_width / 64, win_width, 150);
+	transit1.w = EaseBounceInOut(timer_transition, win_width / 64, win_height, 150);
+	app->render->DrawRectangle(transit1, 255, 0, 0, 255);
+	cout << timer_transition << endl;
+	if (timer_transition >= 1300)
+	{
+		active_transition = false;
+	}
+}
+void Transitions::DrawTransition3()
+{
+	// QUIZAS CIRCULO COMPLETANDOSE TENGO QUE MIRARLO
+	transit1.x = 0;
+	transit1.y = 0;
+	transit1.h = EaseBounceInOut(timer_transition, win_width / 64, win_width, 150);
+	transit1.w = EaseBounceInOut(timer_transition, win_width / 64, win_height, 150);
+	app->render->DrawRectangle(transit1, 255, 0, 0, 255);
+	cout << timer_transition << endl;
+	if (timer_transition >= 1300)
+	{
+		active_transition = false;
+	}
+}
+void Transitions::DrawTransition4()
+{
+	//INTENTO DE COMO LO HACEN EN POKEMON BLANCO Y NEGRO
+	transit1.x = 0;
+	transit1.y = 0;
+	transit1.h = EaseBounceInOut(timer_transition, win_width / 64, win_width, 150);
+	transit1.w = EaseBounceInOut(timer_transition, win_width / 64, win_height, 150);
+	app->render->DrawRectangle(transit1, 255, 0, 0, 255);
+	cout << timer_transition << endl;
+	if (timer_transition >= 1300)
+	{
+		active_transition = false;
+	}
+}
+*/
 
 

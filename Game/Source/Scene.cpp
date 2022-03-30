@@ -60,16 +60,17 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
 	{
 		app->transitions->active_transition = true;
-		app->transitions->DrawTransition1();
+		app->transitions->animationSelected = 1;
 		//app->transitions->timer_transition = 0;
 	}
 
 	//Draw GUI
 	app->guiManager->Draw();
 
+	
 	return true;
 }
 
@@ -81,6 +82,7 @@ bool Scene::PostUpdate()
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
+	
 	return ret;
 }
 

@@ -2,6 +2,7 @@
 #define __TRANSITIONS_H__
 
 #include "Module.h"
+#include "Render.h"
 #include "SDL/include/SDL_rect.h"
 
 class Transitions : public Module
@@ -24,9 +25,12 @@ public:
 	void DrawTransition1();
 
 public:
-
+	int animationSelected;
 	bool active_transition = false;
 	int timer_transition = 0;
+	uint win_width;
+	uint win_height;
+
 	// The rectangles of the screen, used to render the animation
 	SDL_Rect transit1;
 	SDL_Rect transit2;

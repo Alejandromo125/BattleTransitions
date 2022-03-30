@@ -11,8 +11,12 @@ C:\GITHUB\BattleTransitions\Game\Source\easings.h(222,23): warning C4244: 'initi
 C:\GITHUB\BattleTransitions\Game\Source\easings.h(236,85): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 C:\GITHUB\BattleTransitions\Game\Source\easings.h(250,27): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\GITHUB\BattleTransitions\Game\Source\easings.h(254,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(46,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(46,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(47,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(47,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(59,65): warning C4244: 'argument': conversion from 'uint' to 'float', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(59,59): warning C4244: 'argument': conversion from 'uint' to 'float', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(59,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(59,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(60,65): warning C4244: 'argument': conversion from 'uint' to 'float', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(60,59): warning C4244: 'argument': conversion from 'uint' to 'float', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(60,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\GITHUB\BattleTransitions\Game\Source\Transitions.cpp(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Game.vcxproj -> C:\GITHUB\BattleTransitions\Build\Debug\Game.exe
