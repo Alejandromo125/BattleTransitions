@@ -17,7 +17,7 @@ Transitions::~Transitions() {}
 
 bool Transitions::Start()
 {
-	pokeball = app->tex->Load("Assets/textures/")
+	pokeball = app->tex->Load("Assets/textures/Pokeball.png");
 	app->win->GetWindowSize(win_width, win_height);
 
 	return true;
@@ -27,8 +27,13 @@ bool Transitions::PostUpdate()
 {
 	bool ret = true;
 
-	if (active_transition)
+
+	switch (currentStep)
 	{
+	case Transitions::NONE:
+		timer_transition = 0;
+		break;
+	case Transitions::TRANSTITION:
 		timer_transition++;
 
 		if (animationSelected == 1)
@@ -43,12 +48,14 @@ bool Transitions::PostUpdate()
 		{
 			DrawTransition3();
 		}
-		
+		break;
+	case Transitions::FROM_TRANSITION:
+		timer_transition--;
+		break;
+	default:
+		break;
 	}
-	else if (!active_transition)
-	{
-		timer_transition = 0;
-	}
+	
 	
 	
 	return ret;
@@ -57,32 +64,42 @@ bool Transitions::PostUpdate()
 
 void Transitions::SelectTransition(int id)
 {
-	if (!active_transition)
+	if (currentStep == Fade_Step::NONE)
 	{
-		active_transition = true;
+		currentStep = Fade_Step::TRANSTITION;
 		animationSelected = id;
 	}
 }
 
 void Transitions::DrawTransition1()
 {
-	//RECTANGULO SE HACE MAS GRANDE DESDE ESQUINA IZQUIERDA ARRIBA HASTA COMPLETAR LA TRANSICION
+	//SLIDE TRANSITION
 
+	SDL_Rect Rect1;
+	
 	Rect1.x = 0;
 	Rect1.y = 0;
-	Rect1.h = EaseLinearIn(timer_transition/4, win_height / 64, win_height, 240);
-	Rect1.w = EaseLinearIn(timer_transition/4, win_width / 64, win_width, 240);
+	Rect1.h = win_height;
+	Rect1.w = 0;
+	
+	Rect1.w = EaseLinearInOut(timer_transition / 4, win_width / 64, win_width, 240); 
 	app->render->DrawRectangle(Rect1, 255, 0, 0, 255);
-
-	if (timer_transition >= 2600)
+	/*
+	if (timer_transition >= 3500)
 	{
 		active_transition = false;
 	}
+	*/
+	
 }
 
 void Transitions::DrawTransition2()
 {
 	// BARRAS DESDE LA DERECHA A LOS LADOS
+	SDL_Rect Rect1;
+	SDL_Rect Rect2;
+	SDL_Rect Rect3;
+	SDL_Rect Rect4;
 
 	Rect1.x = 0;  Rect2.x = win_width;  Rect3.x = 0; Rect4.x = win_width;
 	Rect1.y = 0;
@@ -91,6 +108,7 @@ void Transitions::DrawTransition2()
 	Rect4.y = (win_height / 4) * 3;
 	Rect1.h = win_height / 4; Rect2.h = win_height / 4; Rect3.h = win_height / 4; Rect4.h = win_height / 4;
 
+	
 	Rect1.w = EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240);
 	Rect2.w = -EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240);
 	Rect3.w = EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240);
@@ -102,21 +120,43 @@ void Transitions::DrawTransition2()
 	app->render->DrawRectangle(Rect4, 123, 0, 122, 255);
 
 	
-	if (timer_transition >= 2600)
-	{
-		active_transition = false;
-	}
 }
 
 void Transitions::DrawTransition3()
 {
-	// QUIZAS CIRCULO COMPLETANDOSE TENGO QUE MIRARLO
-	app->render->DrawTexture(pokeball, 10, 10, NULL, 0, 0);
-	app->render->DrawCircle(win_width / 2, win_height / 2, EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240) , 255, 0, 0, 255);
-	if (timer_transition >= 1300)
-	{
-		active_transition = false;
-	}
+	// POKEMON TRANSITION
+	SDL_Rect Rect1;
+	SDL_Rect Rect2;
+	SDL_Rect Rect3;
+	SDL_Rect Rect4;
+	SDL_Rect Rect5;
+
+	Rect1.x = 0;  Rect2.x = win_width;  Rect3.x = 0; Rect4.x = win_width; Rect5.x = 0;
+	Rect1.y = 0;
+	Rect2.y = win_height / 5;
+	Rect3.y = (win_height / 5) * 2;
+	Rect4.y = (win_height / 5) * 3;
+	Rect5.y = (win_height / 5) * 4;
+	Rect1.h = win_height / 5; Rect2.h = win_height / 5; Rect3.h = win_height / 5; Rect4.h = win_height / 5; Rect5.h = win_height / 5;
+
+	Rect1.w =  EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
+	Rect2.w = -EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
+	Rect3.w =  EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
+	Rect4.w = -EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
+	Rect5.w =  EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
+
+	app->render->DrawRectangle(Rect1, 255, 0, 0, 255);
+	app->render->DrawRectangle(Rect2, 255, 0, 0, 255);
+	app->render->DrawRectangle(Rect3, 255, 0, 0, 255);
+	app->render->DrawRectangle(Rect4, 255, 0, 0, 255);
+	app->render->DrawRectangle(Rect5, 255, 0, 0, 255);
+
+	app->render->DrawTexture(pokeball, (Rect1.x + Rect1.w - 120), (Rect1.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect2.x + Rect2.w - 120), (Rect2.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect3.x + Rect3.w - 120), (Rect3.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect4.x + Rect4.w - 120), (Rect4.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect5.x + Rect5.w - 120), (Rect5.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
+	
 }
 /*
 void Transitions::DrawTransition4()

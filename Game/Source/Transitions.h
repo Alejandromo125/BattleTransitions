@@ -29,18 +29,21 @@ public:
 
 public:
 
+	enum Fade_Step
+	{
+		NONE,
+		TRANSTITION,
+		FROM_TRANSITION
+	} currentStep = Fade_Step::NONE;
+
 	int animationSelected;
-	bool active_transition = false;
 	int timer_transition = 0;
 	uint win_width;
 	uint win_height;
 
 	// The rectangles of the screen, used to render the animation
-	SDL_Rect Rect1;
-	SDL_Rect Rect2;
-    SDL_Rect Rect3;
-    SDL_Rect Rect4;
 	
+
 	SDL_Texture* pokeball;
 };
 
