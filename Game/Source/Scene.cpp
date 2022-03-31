@@ -37,9 +37,6 @@ bool Scene::Start()
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
-	// L14: TODO 2: Declare a GUI Button and create it using the GuiManager
-	btn1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Test1", { (app->win->GetWidth() / 2) - 200, app->win->GetWidth() / 10, 160, 40 }, this);
-	btn2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Test2", { (app->win->GetWidth() / 2) + 200, app->win->GetWidth() / 10, 160, 40 }, this);
 
 	return true;
 }
@@ -62,22 +59,22 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
 	{
-		app->transitions->SelectTransition(1);
+		app->transitions->SelectTransition(1,0,2500);
 
 	}
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
 	{
-		app->transitions->SelectTransition(2);
+		app->transitions->SelectTransition(2,0,2500);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 	{
-		app->transitions->SelectTransition(3);
+		app->transitions->SelectTransition(3,0,2500);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
+	{
+		app->transitions->SelectTransition(4, 0, 2500);
 	}
 
-	//Draw GUI
-	app->guiManager->Draw();
-
-	
 	return true;
 }
 

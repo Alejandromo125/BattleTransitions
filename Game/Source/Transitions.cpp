@@ -4,8 +4,11 @@
 #include "easings.h"
 #include "Window.h"
 #include "Textures.h"
+#include <SDL_image/include/SDL_image.h>
+#include <iostream>
 
-//https://github.com/enricmc19/BattleScene-Transitions
+using namespace std;
+
 
 
 Transitions::Transitions() :Module()
@@ -17,12 +20,20 @@ Transitions::~Transitions() {}
 
 bool Transitions::Start()
 {
+	
+	texture = app->tex->Load("Assets/textures/eyes.png");
 	pokeball = app->tex->Load("Assets/textures/Pokeball.png");
 	app->win->GetWindowSize(win_width, win_height);
 
 	return true;
 }
+bool Transitions::Update()
+{
+	bool ret = true;
 
+	
+	return ret;
+}
 bool Transitions::PostUpdate()
 {
 	bool ret = true;
@@ -31,10 +42,12 @@ bool Transitions::PostUpdate()
 	switch (currentStep)
 	{
 	case Transitions::NONE:
-		timer_transition = 0;
+		
 		break;
 	case Transitions::TRANSTITION:
-		timer_transition++;
+
+		
+		timer_in_transition++;
 
 		if (animationSelected == 1)
 		{
@@ -48,24 +61,54 @@ bool Transitions::PostUpdate()
 		{
 			DrawTransition3();
 		}
+
+		if (timer_in_transition >= timer_out_transition)
+		{
+			currentStep = Fade_Step::FROM_TRANSITION;
+		}
+
 		break;
 	case Transitions::FROM_TRANSITION:
-		timer_transition--;
+
+		timer_out_transition--;
+
+		if (animationSelected == 1)
+		{
+			DrawTransition1();
+		}
+		if (animationSelected == 2)
+		{
+			DrawTransition2();
+		}
+		if (animationSelected == 3)
+		{
+			DrawTransition3();
+		}
+		if (animationSelected == 4)
+		{
+			DrawTransition4();
+		}
+
+		if (timer_out_transition <= 0)
+		{
+			currentStep = Fade_Step::NONE;
+		}
+
 		break;
 	default:
 		break;
 	}
 	
-	
-	
 	return ret;
 
 }
 
-void Transitions::SelectTransition(int id)
+void Transitions::SelectTransition(int id,int timer1,int timer2)
 {
 	if (currentStep == Fade_Step::NONE)
 	{
+		timer_in_transition = timer1;
+		timer_out_transition = timer2;
 		currentStep = Fade_Step::TRANSTITION;
 		animationSelected = id;
 	}
@@ -82,20 +125,15 @@ void Transitions::DrawTransition1()
 	Rect1.h = win_height;
 	Rect1.w = 0;
 	
-	Rect1.w = EaseLinearInOut(timer_transition / 4, win_width / 64, win_width, 240); 
+	if(currentStep == Fade_Step::TRANSTITION) Rect1.w = EaseLinearInOut(timer_in_transition / 8, win_width / 64, win_width, 240); 
+	if (currentStep == Fade_Step::FROM_TRANSITION) Rect1.w = EaseLinearInOut(timer_out_transition / 8, win_width / 64, win_width, 240);
 	app->render->DrawRectangle(Rect1, 255, 0, 0, 255);
-	/*
-	if (timer_transition >= 3500)
-	{
-		active_transition = false;
-	}
-	*/
-	
+
 }
 
 void Transitions::DrawTransition2()
 {
-	// BARRAS DESDE LA DERECHA A LOS LADOS
+	// Demasiado similar al otro quizas cambiar a verticales o algo por el estilo
 	SDL_Rect Rect1;
 	SDL_Rect Rect2;
 	SDL_Rect Rect3;
@@ -108,11 +146,20 @@ void Transitions::DrawTransition2()
 	Rect4.y = (win_height / 4) * 3;
 	Rect1.h = win_height / 4; Rect2.h = win_height / 4; Rect3.h = win_height / 4; Rect4.h = win_height / 4;
 
-	
-	Rect1.w = EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240);
-	Rect2.w = -EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240);
-	Rect3.w = EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240);
-	Rect4.w = -EaseLinearIn(timer_transition / 4, win_width / 64, win_width, 240);
+	if (currentStep == Fade_Step::TRANSTITION)
+	{
+		Rect1.w = EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+		Rect2.w = -EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+		Rect3.w = EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+		Rect4.w = -EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+	}
+	if (currentStep == Fade_Step::FROM_TRANSITION)
+	{
+		Rect1.w = EaseLinearIn(timer_out_transition / 8, win_width / 64, win_width, 240);
+		Rect2.w = -EaseLinearIn(timer_out_transition / 8, win_width / 64, win_width, 240);
+		Rect3.w = EaseLinearIn(timer_out_transition / 8, win_width / 64, win_width, 240);
+		Rect4.w = -EaseLinearIn(timer_out_transition / 8, win_width / 64, win_width, 240);
+	}
 
 	app->render->DrawRectangle(Rect1, 255, 0, 0, 255);
 	app->render->DrawRectangle(Rect2, 0, 255, 0, 255);
@@ -139,11 +186,11 @@ void Transitions::DrawTransition3()
 	Rect5.y = (win_height / 5) * 4;
 	Rect1.h = win_height / 5; Rect2.h = win_height / 5; Rect3.h = win_height / 5; Rect4.h = win_height / 5; Rect5.h = win_height / 5;
 
-	Rect1.w =  EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
-	Rect2.w = -EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
-	Rect3.w =  EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
-	Rect4.w = -EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
-	Rect5.w =  EaseLinearIn(timer_transition / 8, win_width / 64, win_width, 240);
+	Rect1.w =  EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+	Rect2.w = -EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+	Rect3.w =  EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+	Rect4.w = -EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
+	Rect5.w =  EaseLinearIn(timer_in_transition / 8, win_width / 64, win_width, 240);
 
 	app->render->DrawRectangle(Rect1, 255, 0, 0, 255);
 	app->render->DrawRectangle(Rect2, 255, 0, 0, 255);
@@ -151,28 +198,37 @@ void Transitions::DrawTransition3()
 	app->render->DrawRectangle(Rect4, 255, 0, 0, 255);
 	app->render->DrawRectangle(Rect5, 255, 0, 0, 255);
 
-	app->render->DrawTexture(pokeball, (Rect1.x + Rect1.w - 120), (Rect1.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
-	app->render->DrawTexture(pokeball, (Rect2.x + Rect2.w - 120), (Rect2.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
-	app->render->DrawTexture(pokeball, (Rect3.x + Rect3.w - 120), (Rect3.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
-	app->render->DrawTexture(pokeball, (Rect4.x + Rect4.w - 120), (Rect4.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
-	app->render->DrawTexture(pokeball, (Rect5.x + Rect5.w - 120), (Rect5.y - 10), NULL, 0, EaseLinearIn(timer_transition / 24, win_width / 64, win_width, 240));
-	
+	app->render->DrawTexture(pokeball, (Rect1.x + Rect1.w - 120), (Rect1.y - 10), NULL, 0, EaseLinearIn(timer_in_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect2.x + Rect2.w - 120), (Rect2.y - 10), NULL, 0, EaseLinearIn(timer_in_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect3.x + Rect3.w - 120), (Rect3.y - 10), NULL, 0, EaseLinearIn(timer_in_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect4.x + Rect4.w - 120), (Rect4.y - 10), NULL, 0, EaseLinearIn(timer_in_transition / 24, win_width / 64, win_width, 240));
+	app->render->DrawTexture(pokeball, (Rect5.x + Rect5.w - 120), (Rect5.y - 10), NULL, 0, EaseLinearIn(timer_in_transition / 24, win_width / 64, win_width, 240));
+
 }
-/*
+
 void Transitions::DrawTransition4()
 {
-	//INTENTO DE COMO LO HACEN EN POKEMON BLANCO Y NEGRO
-	transit1.x = 0;
-	transit1.y = 0;
-	transit1.h = EaseBounceInOut(timer_transition, win_width / 64, win_width, 150);
-	transit1.w = EaseBounceInOut(timer_transition, win_width / 64, win_height, 150);
-	app->render->DrawRectangle(transit1, 255, 0, 0, 255);
-	cout << timer_transition << endl;
-	if (timer_transition >= 1300)
-	{
-		active_transition = false;
-	}
+	//PENSAR QUE HACER PARA TRANSICION 4
+	
+
+
+	//SDL_SetTextureColorMod(texture, EaseLinearIn(timer_in_transition / 10, 1, 255, 254), 0, 0);
+	//if (currentStep == Fade_Step::TRANSTITION) 
+	//app->render->DrawTexture(texture, 0, 0, NULL,0);
+
+
+
+	SDL_Rect Rect1;
+	Rect1.x = 0;
+	Rect1.y = 0;
+	Rect1.w = win_width;
+	Rect1.h = win_height;
+	
+	if (currentStep == Fade_Step::TRANSTITION) app->render->DrawRectangle(Rect1, timer_in_transition, 0, 0, 255); cout << timer_in_transition << endl;
+	if (currentStep == Fade_Step::FROM_TRANSITION) app->render->DrawRectangle(Rect1, timer_out_transition/10, 0, 0, 255); cout << timer_out_transition << endl;
+
+
 }
-*/
+
 
 
