@@ -57,20 +57,20 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		app->transitions->SelectTransition(1,0,2500);
 
 	}
-	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		app->transitions->SelectTransition(2,0,2500);
 	}
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
 		app->transitions->SelectTransition(3,0,2500);
 	}
-	if (app->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 	{
 		app->transitions->SelectTransition(4, 0, 2500);
 	}
