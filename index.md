@@ -19,7 +19,7 @@ Camera battle transitions are something that has been commonly used in [rpgs](ht
 1. Usage of shaders:
 - Shaders are commonly used for transitons as they allow a more complex transition. Shader trasitions follow the next logic.First you design the pattern you want the transition to have creating the drawing and painting it in grayscale, it is important to know that this type of transition starts getting drawn onto the screen from the darkest pixel to the whithest one, meaning that it has an order of drawing. Here we have some exaples of shaders being used in transitions for videogames.
 2. Distortion of textures
-- This distortion of textures is created with the use of filters into the image shown onto the screen. Here we have some examples of distrotion transitions in videogames.
+- This distortion of textures is created with the use of filters into the image shown onto the screen. Here we have some examples of distrotion transitions in videogames. 
 4. Geometrical transitions
 - This transitions are the easiest ones to apply, here we have transitions such as fades to colour, rectangles wiping the screen or different geometrical forms wiping the screen too. Here we have some examples in videogames of this types of transitions.
 
