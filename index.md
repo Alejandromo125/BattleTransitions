@@ -30,10 +30,9 @@ All transitions are done with the use of easings:
 #### Easings
 - Easings consist on mathematical formulas that help developers assigns certain speeds to animations and could be used for example to calculate the aproximmate possition in time of objects that could follow the same path the easing is showing.
 - PONER AQUI INFORMACION DE LOS EASINGS CON FOTOS Y CODIGO DE EJEMPLO
--Wipe Screen Implementation
-#### AQUI PONER EL CODIGO Y UN GIF
+#### Wipe screen implementation
 ```c++
-//CODE GOES HERE ALONGISDE IMAGE
+//CODE GOES HERE ALONGISDE GIF
 ```
 ### Possible improvements
 One possible improvement that I have found is that shaders can be also implented with the usage of SDL2. Here we have a link to a repo on github that has this type of transitions implemented [transitions with shaders](). As I could not come up with the code to develop it myself I decided to at least show that it is possible to do with SDL, eventhough it is easier to apply in unity.
