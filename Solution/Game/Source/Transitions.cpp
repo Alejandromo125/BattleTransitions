@@ -239,8 +239,8 @@ void Transitions::DrawTransition4()
 	Rect1.w = win_width;
 	Rect1.h = win_height;
 	
-	if (currentStep == Fade_Step::TRANSTITION) app->render->DrawRectangle(Rect1, timer_in_transition/10, 0, 0, 255); cout << timer_in_transition << endl;
-	if (currentStep == Fade_Step::FROM_TRANSITION) app->render->DrawRectangle(Rect1, timer_out_transition/10, 0, 0, 255); cout << timer_out_transition << endl;
+	if (currentStep == Fade_Step::TRANSTITION) app->render->DrawRectangle(Rect1, timer_in_transition/10, 0, 0, 255); 
+	if (currentStep == Fade_Step::FROM_TRANSITION) app->render->DrawRectangle(Rect1, timer_out_transition/10, 0, 0, 255); 
 
 
 }
