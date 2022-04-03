@@ -18,17 +18,17 @@ Camera battle transitions are something that has been commonly used in [rpgs](ht
 
 1. Usage of shaders:
 - Shaders are commonly used for transitons as they allow a more complex transition. Shader trasitions follow the next logic.First you design the pattern you want the transition to have creating the drawing and painting it in grayscale, it is important to know that this type of transition starts getting drawn onto the screen from the darkest pixel to the whithest one, meaning that it has an order of drawing. Here we have some exaples of shaders being used in transitions for videogames.
-![Shader Image used](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/Shader_Waves.PNG)
-![Shader in action](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/Waves_Shader.GIF)
+![Shader Image used](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/Shader_Waves.png)
+![Shader in action](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/Waves_Shader.gif)
 2. Distortion of textures
 - This distortion of textures is created with the use of filters into the image shown onto the screen. Here we have some examples of distrotion transitions in videogames
 
-![Distortion](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/Distortion.GIF)
+![Distortion](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/Distortion.gif)
 
 4. Geometrical transitions
 - This transitions are the easiest ones to apply, here we have transitions such as fades to colour, rectangles wiping the screen or different geometrical forms wiping the screen too. Here we have some examples in videogames of this types of transitions.
-![FadeToBlack](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/FadeToBlack.GIF)
-![HorizontalBars](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/HorizontalBars.GIF)
+![FadeToBlack](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/FadeToBlack.gif)
+![HorizontalBars](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/HorizontalBars.gif)
 
 ### Selected aproach
 As for the selected aproach for this project I have developed some easy transitions such as wipe of screen, rectangles coming from the sides and blinking fades.
@@ -38,16 +38,16 @@ All transitions are done with the use of easings:
 - Easings consist on mathematical formulas that help developers assigns certain speeds to animations and could be used for example to calculate the aproximmate possition in time of objects that could follow the same path the easing is showing.
 1. Linear
 -   Straight forward line, simple linear interpolation.
-![LinearEasings](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/LINEAR_EASE.GIF)
+![LinearEasings](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/LINEAR_EASE.gif)
 2. Ease in Quad
 -   A line that starts slow from the beggining and speeds up as time goes on
-![EaseIn](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/EASE_IN_CURVE.GIF)
+![EaseIn](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/EASE_IN_CURVE.gif)
 3. Ease out Quad
 -   Line that starts fast but decreasses it's acceleration as time goes on
-![EaseOut](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/EASE_OUT_CURVE.GIF)
+![EaseOut](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/EASE_OUT_CURVE.gif)
 4. Ease in out Quad
 -   Line that starts slowly and ends slowly, reaching it's maximum speed in the middle of the function
-![EaseInOut](https://github.com/Alejandromo125/BattleTransitions/blob/main/Documentation/EASE_IN_OUT_CURVE.GIF)
+![EaseInOut](https://github.com/Alejandromo125/BattleTransitions/tree/main/Documentation/EASE_IN_OUT_CURVE.gif)
 
 We have a lot of different easings functions, see documentation to check more easings functions.
 
