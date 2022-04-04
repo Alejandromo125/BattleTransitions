@@ -110,7 +110,7 @@ void Transitions::DrawTransition2()
 ```
 #### Horizontal lines with textures added
 ```c++
-SDL_Rect Rect1;
+void Transitions::DrawTransition3()
 	SDL_Rect Rect2;
 	SDL_Rect Rect3;
 	SDL_Rect Rect4;
